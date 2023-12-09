@@ -27,7 +27,7 @@ assign rght_scaled = (rght_prodscaled[12] && !{&rght_prodscaled[11]}) ? 12'h800 
                     (!rght_prodscaled[12] && rght_prodscaled[11]) ? 12'h7FF : rght_prodscaled[11:0];
 
 // generate PWM signals
-PWM12 lftpwm(.duty(lft_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(lftPWM1),.PWM2(lftPWM2));
-PWM12 rghtpwm(.duty(rght_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(rghtPWM1),.PWM2(rghtPWM2));
+PWM12 lftpwm(.duty(-lft_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(lftPWM1),.PWM2(lftPWM2));
+PWM12 rghtpwm(.duty(12'h800 + rght_scaled),.clk(clk),.rst_n(rst_n),.PWM1(rghtPWM1),.PWM2(rghtPWM2));
 
 endmodule
