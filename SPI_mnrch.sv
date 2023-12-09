@@ -1,14 +1,14 @@
-module SPI_mnrch(clk, rst_n, SS_n, SCLK, MOSI, MISO, wrt, wt_data, done, rd_data);
+module SPI_mnrch(clk, rst_n, SS_n, SCLK, MOSI, MISO, wrt, cmd, done, rspns);
 	input clk;				// clk
 	input rst_n;			// active low async reset
 	input MISO;				// SPI MISO line
 	input wrt;				// initiate SPI transmission when high
-	input [15:0] wt_data;	// data to send
+	input [15:0] cmd;	// data to send
 	output logic SS_n;		// Serf select
 	output logic SCLK;		// SPI SCLK
 	output MOSI;			// SPI MOSI line
 	output logic done;		// held high after a transmission is complete
-	output [15:0] rd_data;	// data received by SPI
+	output [15:0] rspns;	// data received by SPI
 
 	typedef enum logic [2:0] {IDLE, FRONT, SHIFT, BACK} state_t;
 
@@ -127,7 +127,7 @@ module SPI_mnrch(clk, rst_n, SS_n, SCLK, MOSI, MISO, wrt, wt_data, done, rd_data
 	// infer SPI 16-bit shift register
 	always_ff @(posedge clk) begin
 		if(init)
-			shft_reg <= wt_data;
+			shft_reg <= cmd;
 		else if(shft)
 			shft_reg <= {shft_reg[14:0], MISO_smpl};
 	end
@@ -135,6 +135,6 @@ module SPI_mnrch(clk, rst_n, SS_n, SCLK, MOSI, MISO, wrt, wt_data, done, rd_data
 	// set MOSI to MSB of shft_reg
 	assign MOSI = shft_reg[15];
 	
-	assign rd_data = shft_reg;
+	assign rspns = shft_reg;
 	
 endmodule

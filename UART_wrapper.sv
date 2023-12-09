@@ -41,7 +41,6 @@ module UART_wrapper (clk, rst_n, RX, cmd_rdy, cmd, clr_cmd_rdy, trmt, resp, tx_d
 		case (state)
 			RECEIVE_BOT: if (rx_rdy) begin
 				nxt_state = CMD_RDY;
-				cmd_rdy = 1;
 			end
 			
 			CMD_RDY: begin

@@ -1,9 +1,9 @@
-module MtrDrv(lft_spd,rght_spd,vbatt,clk,rst_n,lft_PWM1,lft_PWM2,rght_PWM1,rght_PWM2);
+module MtrDrv(lft_spd,rght_spd,vbatt,clk,rst_n,lftPWM1,lftPWM2,rghtPWM1,rghtPWM2);
 
 input signed [11:0] lft_spd, rght_spd;
 input [5:0] vbatt;
 input clk,rst_n;
-output lft_PWM1,lft_PWM2,rght_PWM1,rght_PWM2;
+output lftPWM1,lftPWM2,rghtPWM1,rghtPWM2;
 
 logic signed [23:0] lft_prod,rght_prod;
 logic signed [12:0] lft_prodscaled,rght_prodscaled;
@@ -27,7 +27,7 @@ assign rght_scaled = (rght_prodscaled[12] && !{&rght_prodscaled[11]}) ? 12'h800 
                     (!rght_prodscaled[12] && rght_prodscaled[11]) ? 12'h7FF : rght_prodscaled[11:0];
 
 // generate PWM signals
-PWM12 lftpwm(.duty(lft_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(lft_PWM1),.PWM2(lft_PWM2));
-PWM12 rghtpwm(.duty(rght_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(rght_PWM1),.PWM2(rght_PWM2));
+PWM12 lftpwm(.duty(lft_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(lftPWM1),.PWM2(lftPWM2));
+PWM12 rghtpwm(.duty(rght_scaled + 12'h800),.clk(clk),.rst_n(rst_n),.PWM1(rghtPWM1),.PWM2(rghtPWM2));
 
 endmodule
