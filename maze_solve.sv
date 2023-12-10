@@ -51,7 +51,10 @@ always_comb begin
   case(curr_state)
 
 	SET_HDNG: begin
-		if(mv_cmplt & cmd0) begin
+		if(sol_cmplt) begin
+			next_state = IDLE; 
+		end	
+		else if(mv_cmplt & cmd0) begin
 			if(lft_opn | !(lft_opn | rght_opn)) begin
 				next_state = STRT_HDNG; 
 				strt_hdng = 1; 
@@ -117,20 +120,16 @@ always_comb begin
 		
 	end
 
+	STRT_HDNG: begin
+		strt_hdng = 1;
+		next_state = WAIT; 
+	end
+	
 	WAIT: begin
 		if(mv_cmplt) begin
 			next_state = FRWRD; 
 		end 
 			
-	end
-
-	STRT_HDNG: begin
-		if(sol_cmplt) begin
-			next_state = IDLE; 
-		end else begin
-			strt_hdng = 1;
-			next_state = WAIT; 
-		end
 	end
 
 	FRWRD: begin

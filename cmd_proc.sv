@@ -76,14 +76,13 @@ cmd_md = 1;
 				next_state = IDLE; 
 				send_resp = 1; 
 			end
-			
-
 		end
 
 		SOLVE: begin
 			cmd_md = 0; 
 			if(sol_cmplt) begin
 				next_state = IDLE;
+				send_resp = 1;
 			end
 
 		end
