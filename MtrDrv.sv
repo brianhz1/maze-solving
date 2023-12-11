@@ -1,7 +1,7 @@
 module MtrDrv(lft_spd,rght_spd,vbatt,clk,rst_n,lftPWM1,lftPWM2,rghtPWM1,rghtPWM2);
 
 input signed [11:0] lft_spd, rght_spd;
-input [5:0] vbatt;
+input [11:0] vbatt;
 input clk,rst_n;
 output lftPWM1,lftPWM2,rghtPWM1,rghtPWM2;
 
@@ -9,7 +9,7 @@ logic signed [23:0] lft_prod,rght_prod;
 logic signed [12:0] lft_prodscaled,rght_prodscaled;
 logic signed [12:0] scale_factor;
 
-DutyScaleROM scale_read(.clk(clk),.batt_level(vbatt),.scale(scale_factor));
+DutyScaleROM scale_read(.clk(clk),.batt_level(vbatt[9:4]),.scale(scale_factor));
 
 // multiply scalefactor to left speed and divide by 2048 (11 bit left shift)
 assign lft_prod = scale_factor * lft_spd;
