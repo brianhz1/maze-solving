@@ -22,12 +22,22 @@ module PID (
 	wire signed [9:0] err_sat; 		// saturated error
 	
 	assign error = actl_hdng - dsrd_hdng;
+ 	
+	logic signed [9:0] err_sat_pipeline; 
+	always_ff @(posedge clk, negedge rst_n) begin
+		if(!rst_n) begin
+			err_sat_pipeline <= 0;
+		end
+		else begin
+			err_sat_pipeline <= err_sat;
+		end
+	end
  
 	assign err_sat = (error[11] && ~&error[10:9]) ? 10'h200 : 		// saturate to most negative number
 					 (~error[11] && |error[10:9]) ? 10'h1FF :  		// saturate to most positve number
 					 error[9:0];							  	 	// copy lower 10 bits
-					 
-	assign P_term = $signed(P_COEFF) * err_sat;
+	
+	assign P_term = $signed(P_COEFF) * err_sat_pipeline;
 
 	// I term
 	logic [15:0] nxt_integrator, integrator;
@@ -43,7 +53,7 @@ module PID (
 			integrator <= nxt_integrator;
 	end
 
-	assign ext_err_sat = {{6{err_sat[9]}}, err_sat};									// sign extends error
+	assign ext_err_sat = {{6{err_sat_pipeline[9]}}, err_sat_pipeline};									// sign extends error
 	assign integrator_sum = ext_err_sat + integrator;									// adds extended error with integrator
 	assign valid_integrator = (!overflow && hdng_vld) ? integrator_sum : integrator;    // uses previous integrator if not valid
 	assign nxt_integrator = moving ? valid_integrator : 16'h0000;						// assigns next value for the ff
@@ -58,7 +68,7 @@ module PID (
 	logic [10:0] D_diff;
 	logic [9:0] prev_prev_err, prev_err;	// holds last two previous error values
 
-	assign D_diff = {err_sat[9], err_sat} - {prev_prev_err[9], prev_prev_err};
+	assign D_diff = {err_sat_pipeline[9], err_sat_pipeline} - {prev_prev_err[9], prev_prev_err};
 	assign D_diff_sat = (D_diff[10] && ~&D_diff[9:7]) ? 8'h80 : // saturate to most negative
 						(~D_diff[10] && |D_diff[9:7]) ? 8'h7F :	// saturate to most positive
 						D_diff[7:0];							// copy lower 8 bits
@@ -71,7 +81,7 @@ module PID (
 			prev_prev_err <= 0;
 		end 
 		else if(hdng_vld) begin
-			prev_err <= err_sat;
+			prev_err <= err_sat_pipeline;
 			prev_prev_err <= prev_err;
 		end
 	end
@@ -82,7 +92,7 @@ module PID (
 	logic [11:0] PID;									// PID sum divided by 8
 	logic [11:0] frwrd_spd_ext;							// Sign extended frwrd_spd
 	
-	assign at_hdng = err_sat[9] ? (-err_sat < 10'd30) : (err_sat < 10'd30);
+	assign at_hdng = err_sat_pipeline[9] ? (-err_sat_pipeline < 10'd30) : (err_sat_pipeline < 10'd30);
 	
 	assign frwrd_spd_ext = {frwrd_spd[10], frwrd_spd};	// extend to 12 bits
 	
@@ -91,9 +101,20 @@ module PID (
 	assign D_term_ext = {{2{D_term[12]}}, D_term};	// extend to 15 bits
 	
 	assign PID_sum = (P_term_ext + I_term_ext + D_term_ext); // sum P, I, D terms
+	
+	logic [11:0] PID_pipeline;
+	always_ff @(posedge clk, negedge rst_n) begin
+		if(!rst_n) begin
+			PID_pipeline <= 0;
+		end
+		else begin
+			PID_pipeline <= PID;
+		end
+	end
+	
 	assign PID = PID_sum[14:3];								 // divide sum by 8
 	
-	assign lft_spd = moving ? PID + frwrd_spd : 12'h000;
-	assign rght_spd = moving ? frwrd_spd - PID : 12'h000;
+	assign lft_spd = moving ? PID_pipeline + frwrd_spd : 12'h000;
+	assign rght_spd = moving ? frwrd_spd - PID_pipeline : 12'h000;
 	
 endmodule

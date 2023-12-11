@@ -30,6 +30,16 @@ module navigate(clk,rst_n,strt_hdng,strt_mv,stp_lft,stp_rght,mv_cmplt,hdng_rdy,m
   localparam MAX_FRWRD = 11'h2A0;		// max forward speed
   localparam MIN_FRWRD = 11'h0D0;		// minimum duty at which wheels will turn
   
+  logic at_heading_prev, at_heading_posedge;
+  always_ff @(posedge clk, negedge rst_n) begin
+	if(!rst_n)
+		at_heading_prev <= 0;
+	else
+		at_heading_prev <= at_hdng;
+  end
+  
+  assign at_heading_posedge = at_hdng && !at_heading_prev;
+  
   ////////////////////////////////
   // Now form forward register //
   //////////////////////////////
@@ -46,7 +56,7 @@ module navigate(clk,rst_n,strt_hdng,strt_mv,stp_lft,stp_rght,mv_cmplt,hdng_rdy,m
 	                (frwrd_spd>{4'h0,frwrd_inc,1'b0}) ? frwrd_spd - {4'h0,frwrd_inc,1'b0} : // slow down at 2x accel rate
 					11'h000;
 
-  //<< Your implementation of ancillary circuits and SM >>
+	//<< Your implementation of ancillary circuits and SM >>
 	assign frwrd_inc = FAST_SIM ? 6'h18 : 6'h02;
   
 	// assert en_fusion when forward speed is greater than 50% max speed
@@ -81,7 +91,7 @@ module navigate(clk,rst_n,strt_hdng,strt_mv,stp_lft,stp_rght,mv_cmplt,hdng_rdy,m
 		nxt_state = state;
 		
 		case (state)
-			HDNG: if (at_hdng) begin
+			HDNG: if (at_heading_posedge) begin
 				mv_cmplt = 1;
 				nxt_state = IDLE;
 			end else

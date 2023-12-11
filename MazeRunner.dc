@@ -1,38 +1,38 @@
 #############################
 ####Read in Verilog Files####
 #############################
-read_file -format sverilog {./reset_synch.sv ./UART_wrapper.sv ./UART.sv ./UART_tx.sv ./UART_rx.sv ./cmd_proc.sv ./maze_solve.sv ./navigate.sv ./inert_intf.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./IR_math.sv ./PID.sv ./ MtrDrv.sv ./sensor_intf.sv ./piezo_drv.sv ./maze_runner.sv }
+read_file -format sverilog {./reset_synch.sv ./UART_wrapper.sv ./UART.sv ./UART_tx.sv ./UART_rx.sv ./cmd_proc.sv ./maze_solve.sv ./navigate.sv ./inert_intf.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./IR_math.sv ./PID.sv ./ MtrDrv.sv ./sensor_intf.sv ./piezo_drv.sv ./MazeRunner.sv ./DutyScaleROM.sv ./PWM12.sv ./PWM8.sv ./A2D_intf.sv}
 
 set current_design MazeRunner
 
-create_clock -name "clk" -period 2.5 -waveform {0 1} clk
+create_clock -name "clk" -period 2.75 -waveform {0 1} clk
 
 set_dont_touch_network [find port clk]
 
 set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
 
-set_input_delay -clock clk 0.6 [copy_collection $prim_inputs]
+set_input_delay -clock clk 0.6 $prim_inputs
 
-set_driving_cell -lib_cell NAND2X2_LVT -library saed32lvt_tt0p85v25c
+set_driving_cell -lib_cell NAND2X2_LVT -library saed32lvt_tt0p85v25c $prim_inputs
 
-set_drive 0.1 rst_n
+set_drive 0.0001 rst_n
 
 set_output_delay -clock clk 0.5 [all_outputs]
-set_load 0.10 [all_outputs]
+
+set_load 100 [all_outputs]
 
 set_max_transition 0.125 [current_design]
 
+set_clock_uncertainty 0.125 clk
+
 set_wire_load_model -name 16000 -library saed32lvt_tt0p85v25c
 
-compile -map_effort low
-
+compile -map_effort medium
 ungroup -all -flatten
-
 compile -map_effort medium
 
 report_timing -path full -delay max -nworst 3
-
-report_timing -path full -delay min -nworst 3
+report_timing -path full -delay min
 
 report_area
 

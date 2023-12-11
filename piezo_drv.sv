@@ -106,7 +106,7 @@ always_comb begin
       end
       endgenerate
 */
-      duration = 25'h0800000;  // 2^23 clock periods
+      duration = 25'h0080000;  // 2^23 clock periods
       freq = 14'h0000;
       if(batt_low | fanfare) begin
         // freq = G6;
@@ -126,7 +126,7 @@ always_comb begin
       endgenerate
 */
       freq = G6;
-      duration = 25'h0800000;  // 2^23 clock periods 0100_0000_0000_0000
+      duration = 25'h0080000;  // 2^23 clock periods 0100_0000_0000_0000
       if(&(~duration_cnt)) begin
         load_timer = 1'b1;
         freq = C7;
@@ -145,7 +145,7 @@ always_comb begin
       endgenerate
 */
       freq = C7;
-      duration = 25'h0800000;  // 2^23 clock periods
+      duration = 25'h0080000;  // 2^23 clock periods
       if(&(~duration_cnt)) begin
         load_timer = 1'b1;
         freq = E7;
@@ -164,7 +164,7 @@ always_comb begin
       endgenerate
 */
       freq = E7;
-      duration = 25'h0C00000; // 2^23 + 2^22 clock periods
+      duration = 25'h00C0000; // 2^23 + 2^22 clock periods
       if(batt_low&(&(~duration_cnt)))
         nstate = IDLE;
       else if(&(~duration_cnt)) begin
@@ -185,7 +185,7 @@ always_comb begin
       endgenerate
 */
         freq = G7;
-        duration = 25'h0400000; // 2^22 clock periods
+        duration = 25'h0040000; // 2^22 clock periods
         // 0_0000_0000_0000_0000_0000_0000
       if(&(~duration_cnt)) begin
         load_timer = 1'b1;
@@ -203,7 +203,7 @@ always_comb begin
         duration = 24'h800000; // 2^23 + 2^22 clock periods
       end
 */
-      duration = 25'h1000000; // 2^23 + 2^22 clock periods
+      duration = 25'h0100000; // 2^23 + 2^22 clock periods
       freq = E7;
       if(&(~duration_cnt)) begin
         load_timer = 1'b1;

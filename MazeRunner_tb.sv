@@ -69,257 +69,257 @@ module MazeRunner_tb();
 	end
 	@(posedge clk);
 	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b010) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b001) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h23FF; // turn west command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b001) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b001) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h2000; // turn north command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b001) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b010) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h2C00; // turn west command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b011) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b010) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h27FF; // turn south command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b011) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b000) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h2000; // turn north command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4002; // move command stopping at left open
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b011) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b010) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4000; // move command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b011) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b011) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h23FF; // turn west command
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// cmd = 16'h4003; // move command stop at right
-	// send_cmd = 1;
-	// @(posedge clk);
-	// send_cmd = 0;
-	// @(posedge resp_rdy);
-	// #1;
-	// if(resp !== 8'hA5) begin
-		// $display("Incorrect response");
-		// $stop();
-	// end
-	// if(iPHYS.xx[14:12] !== 3'b000) begin
-		// $display("Incorrect xx");
-		// $stop();
-	// end
-	// if(iPHYS.yy[14:12] !== 3'b011) begin
-		// $display("Incorrect yy");
-		// $stop();
-	// end
-	// @(posedge clk);
-	
-	// #5000;	
-	// $stop();
-	
-	cmd = 16'h6000; // solve command with right affinity
+	cmd = 16'h4000; // move command
 	send_cmd = 1;
 	@(posedge clk);
 	send_cmd = 0;
-	@(negedge hall_n)
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b010) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b001) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
 	
-	if(iPHYS.xx[14:12] !== 3'b011) begin
+	cmd = 16'h23FF; // turn west command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b001) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b001) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h2000; // turn north command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b001) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b010) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h2C00; // turn west command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
 		$display("Incorrect response");
 		$stop();
 	end
 	if(iPHYS.xx[14:12] !== 3'b011) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b010) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h27FF; // turn south command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
 		$display("Incorrect response");
 		$stop();
 	end
+	@(posedge clk);
+	
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b011) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b000) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h2000; // turn north command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4002; // move command stopping at left open
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b011) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b010) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b011) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b011) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h23FF; // turn west command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h4003; // move command stop at right
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b000) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b011) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
 	#5000;	
 	$stop();
+	
+	// cmd = 16'h6000; // solve command with right affinity
+	// send_cmd = 1;
+	// @(posedge clk);
+	// send_cmd = 0;
+	// @(negedge hall_n)
+	
+	// if(iPHYS.xx[14:12] !== 3'b011) begin
+		// $display("Incorrect response");
+		// $stop();
+	// end
+	// if(iPHYS.xx[14:12] !== 3'b011) begin
+		// $display("Incorrect response");
+		// $stop();
+	// end
+	// #5000;	
+	// $stop();
 	
   end
   
