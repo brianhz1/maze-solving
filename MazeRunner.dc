@@ -1,7 +1,7 @@
 #############################
 ####Read in Verilog Files####
 #############################
-read_file -format sverilog {./reset_synch.sv ./UART_wrapper.sv ./UART.sv ./UART_tx.sv ./UART_rx.sv ./cmd_proc.sv ./maze_solve.sv ./navigate.sv ./inert_intf.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./IR_math.sv ./PID.sv ./ MtrDrv.sv ./sensor_intf.sv ./piezo_drv.sv ./MazeRunner.sv ./DutyScaleROM.sv ./PWM12.sv ./PWM8.sv ./A2D_intf.sv}
+read_file -format sverilog {./reset_synch.sv ./UART_wrapper.sv ./UART.sv ./UART_tx.sv ./UART_rx.sv ./cmd_proc.sv ./maze_solve.sv ./navigate.sv ./inert_intf.sv ./inertial_integrator.sv ./SPI_mnrch.sv ./IR_math.sv ./PID.sv MtrDrv.sv ./sensor_intf.sv ./piezo_drv.sv ./MazeRunner.sv ./DutyScaleROM.sv ./PWM12.sv ./PWM8.sv ./A2D_intf.sv}
 
 set current_design MazeRunner
 
@@ -19,7 +19,7 @@ set_drive 0.0001 rst_n
 
 set_output_delay -clock clk 0.5 [all_outputs]
 
-set_load 100 [all_outputs]
+set_load 0.1 [all_outputs]
 
 set_max_transition 0.125 [current_design]
 
@@ -30,8 +30,10 @@ set_wire_load_model -name 16000 -library saed32lvt_tt0p85v25c
 compile -map_effort medium
 ungroup -all -flatten
 compile -map_effort medium
+set_fix_hold clk
+compile -map_effort medium
 
-report_timing -path full -delay max -nworst 3
+report_timing -path full -delay max
 report_timing -path full -delay min
 
 report_area
