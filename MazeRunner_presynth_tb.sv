@@ -69,21 +69,42 @@ module MazeRunner_tb();
 	end
 	@(posedge clk);
 	
-//	cmd = 16'h23FF; // turn west command
-//	send_cmd = 1;
-//	@(posedge clk);
-//	send_cmd = 0;
-//	@(posedge resp_rdy);
-//	#1;
-//	if(resp !== 8'hA5) begin
-//		$display("Incorrect response");
-//		$stop();
-//	end
-//	if(!(iPHYS.heading_robot[19:8] > (12'h3ff - 8'h30)) && !(iPHYS.heading_robot[19:8] < (12'h3ff + 8'h30)) ) begin
-//		$display("INCORRECT MOVE");
-//		$stop();
-//	end
-//	@(posedge clk);
+	cmd = 16'h4000; // move command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(iPHYS.xx[14:12] !== 3'b010) begin
+		$display("Incorrect xx");
+		$stop();
+	end
+	if(iPHYS.yy[14:12] !== 3'b001) begin
+		$display("Incorrect yy");
+		$stop();
+	end
+	@(posedge clk);
+	
+	cmd = 16'h23FF; // turn west command
+	send_cmd = 1;
+	@(posedge clk);
+	send_cmd = 0;
+	@(posedge resp_rdy);
+	#1;
+	if(resp !== 8'hA5) begin
+		$display("Incorrect response");
+		$stop();
+	end
+	if(!(iPHYS.heading_robot[19:8] > (12'hC00 - 8'h30)) && !(iPHYS.heading_robot[19:8] < (12'hC00 + 8'h30)) ) begin
+		$display("INCORRECT MOVE");
+		$stop();
+	end
+	@(posedge clk);
+
 
 
 	cmd = 16'h4000; // move command
